@@ -1,0 +1,24 @@
+[project]
+name = "autogps"
+version = "1.0.0"
+description = "Fast video segment extraction from ROS2 rosbags using GPS collision coordinates"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.20.0",
+    "pyyaml>=6.0",
+    "rosbags>=0.11.0",
+    "tqdm>=4.60.0",
+]
+
+[project.optional-dependencies]
+rectify = ["opencv-python>=4.5.0"]
+
+[project.scripts]
+autogps = "autogps.__main__:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

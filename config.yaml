@@ -1,0 +1,41 @@
+# Auto-GPS Configuration
+# Extracts video segments from ROS2 .mcap rosbags for each collision
+
+# Path to the .mcap rosbag file or directory containing it
+rosbag_path: "rosbags/rosbag_20260224_111406"
+
+# Folder containing collision_XX subdirectories with collision_gps_XX.txt files
+collisions_folder: "output"
+
+# Folder where video segments will be saved
+output_folder: "output/videos"
+
+# Camera topics to extract (one output video per topic per collision)
+camera_topics:
+  - "/camera_left/image_raw/compressed"
+  # - "/camera_right/image_raw/compressed"
+
+# GPS topic
+gps_topic: "/swift/navsat_fix"
+
+# How close (in meters) the trajectory must be to START/END coords to match
+gps_tolerance_m: 50.0
+
+# Seconds to include before START and after END coordinates
+padding_seconds: 2.0
+
+extraction:
+  # "fast"    -> extract raw JPEG bytes + FFmpeg stream copy (NO re-encoding, fastest)
+  # "reencode" -> decode frames + optional rectification + H.264 encode (slower)
+  mode: "fast"
+
+  # Only used when mode = "reencode"
+  rectify_enabled: false
+  calibration_path: "stereo_calib.json"
+  codec: "libx264"
+  crf: 23
+  preset: "veryfast"
+  output_fps: 24
+
+log_level: "INFO"   # DEBUG, INFO, WARNING, ERROR
+log_file: null      # Optional path to a log file

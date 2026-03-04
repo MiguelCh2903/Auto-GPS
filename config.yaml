@@ -5,10 +5,13 @@
 rosbag_path: "rosbags/rosbag_20260224_111406"
 
 # Folder containing collision_XX subdirectories with collision_gps_XX.txt files
+# Videos will be saved in the SAME folder as each collision_gps_XX.txt
 collisions_folder: "output"
 
-# Folder where video segments will be saved
-output_folder: "output/videos"
+# Template for output video filenames (per collision)
+# Variables: {id} = collision_id, {id02d} = collision_id with leading zero, {topic} = camera_topic_slug
+# Examples: "collision_video_{id}.mp4", "collision_{id02d}_{topic}.mp4"
+output_video_template: "collision_video_{id}.mp4"
 
 # Camera topics to extract (one output video per topic per collision)
 camera_topics:

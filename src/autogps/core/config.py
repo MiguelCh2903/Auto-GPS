@@ -22,7 +22,7 @@ class ExtractionConfig:
 class Config:
     rosbag_path: str = ""
     collisions_folder: str = "output"
-    output_folder: str = "output"
+    output_video_template: str = "collision_video_{id}.mp4"
     camera_topics: List[str] = field(
         default_factory=lambda: ["/camera_left/image_raw/compressed"]
     )

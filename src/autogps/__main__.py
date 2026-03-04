@@ -24,8 +24,6 @@ def cmd_run(args) -> int:
         cfg.rosbag_path = args.rosbag
     if args.collisions:
         cfg.collisions_folder = args.collisions
-    if args.output:
-        cfg.output_folder = args.output
     if args.mode:
         cfg.extraction.mode = args.mode
 
@@ -109,7 +107,6 @@ def main() -> None:
     p_run.add_argument("--config", "-c", default="config.yaml", help="Path to config.yaml")
     p_run.add_argument("--rosbag", help="Override rosbag_path from config")
     p_run.add_argument("--collisions", help="Override collisions_folder from config")
-    p_run.add_argument("--output", help="Override output_folder from config")
     p_run.add_argument("--mode", choices=["fast", "reencode"], help="Override extraction mode")
 
     # info

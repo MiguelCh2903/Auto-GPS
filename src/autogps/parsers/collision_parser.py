@@ -24,7 +24,8 @@ class CollisionSegment:
     start_lon: float
     end_lat: float
     end_lon: float
-    source_file: str
+    source_file: str  # full path to collision_gps_XX.txt
+    source_folder: str  # parent folder of source_file
 
 
 def parse_collision_file(txt_path: Path) -> List[CollisionSegment]:
@@ -89,6 +90,7 @@ def parse_collision_file(txt_path: Path) -> List[CollisionSegment]:
                         end_lat=end_lat,
                         end_lon=end_lon,
                         source_file=str(txt_path),
+                        source_folder=str(txt_path.parent),
                     ))
                 # Reset for next collision in the same file
                 state = IDLE

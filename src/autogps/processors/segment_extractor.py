@@ -76,9 +76,10 @@ class SegmentExtractor:
                     output_path=output_path,
                 ))
                 self.logger.debug(
-                    "Collision %d [%s]: %.2f s window",
+                    "Collision %d [%s]: %.2f s, output → %s",
                     seg.collision_id, topic,
                     (ts_range[1] - ts_range[0]) / 1e9,
+                    output_path.name,
                 )
 
         if not time_ranges:
@@ -233,8 +234,14 @@ class SegmentExtractor:
         return segments
 
     def _build_output_path(self, seg: CollisionSegment, topic: str) -> Path:
-        folder = Path(self.config.output_folder) / f"collision_{seg.collision_id:02d}"
-        filename = f"collision_{seg.collision_id:02d}_{_slugify(topic)}.mp4"
+        # Use the parent folder of the source .txt file
+        folder = Path(seg.source_folder)
+        # Replace template variables
+        filename = self.config.output_video_template.format(
+            id=seg.collision_id,
+            id02d=f"{seg.collision_id:02d}",
+            topic=_slugify(topic),
+        )
         return folder / filename
 
 
